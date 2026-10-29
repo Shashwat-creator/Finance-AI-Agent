@@ -1,0 +1,15 @@
+# Reflection
+
+I chose the manual-adjustments slice because it is where the assignment's data problems are concentrated: the Chart of Accounts is an inconsistent oracle, the trial balance does not balance, and the journal file contains three different kinds of defect. Building it forced me to decide what an agent should *not* do.
+
+The main design decision was to make the deterministic core boring. Amounts are `Decimal`, the ten structural rules and six semantic checks are plain Python, and the LLM is optional and confined to intent classification and account-candidate ranking. That felt slower than wiring a LangGraph agent that "reasons" over the entries, but it produced something I can defend: every status and every number resolves to a rule ID and an input hash. The first time I ran the batch, JE-002 was rejected with "difference of 3,500.00" and JE-005 paused with "nearest match 6310 at 55% confidence" — those sentences were generated from the rule results, not written by a model. That is the property I would want an auditor to see.
+
+The second decision was to treat warnings as first-class rather than binary pass/fail. JE-003 is balanced and references valid accounts, but its 11,200 revaluation does not tie to the 10,730.20 / 19,809.60 implied by the supplied rates. It is neither safe to accept nor correct to reject, so it proceeds to review with an explicit warning. Similarly, `TBD` cash-flow categories do not block the journal but must block the cash-flow statement downstream. Encoding "this is suspicious but not fatal" turned out to be most of the design work.
+
+What I would do differently: I started by trusting the scaffold's tests, which expected 73 COA rows and 63 TB rows. The real files have 72 and 62. That was a useful reminder that fixtures are data too, and that row counts should be asserted from the file, not hard-coded. I also initially let reconciliation warnings duplicate validation errors, which made the decision reasons noisy; deduplicating by rule ownership made the reports noticeably more usable.
+
+The hardest part was the boundary around the mapper. An LLM could confidently map 6315 to 6310, and that would often be right — but "often right" is not an accounting control. The mapper now proposes ranked candidates with evidence and refuses to mutate the entry; a human accepts. The same reasoning applies to missing FX rates: the system marks the translation impossible rather than defaulting to 1.0.
+
+Limitations are real. The mapper is lexical, not semantic. The prior-period TB is used for lineage warnings only, not a full roll-forward reconciliation. Human approval is modelled as a status rather than a persisted workflow. And the wider five-agent system exists as contracts and a build order, not running code.
+
+If I continued, I would build Agent 2 (TB and FX) next, because the 4,800 imbalance and the missing GBP rate are the blocking defects for every statement. But I would keep the same rule: determinism owns the numbers, the model owns the words, and the human owns the judgement.

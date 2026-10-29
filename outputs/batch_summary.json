@@ -1,0 +1,91 @@
+{
+  "run_id": "RUN-20261028T193605Z-92fe41-113971",
+  "generated_at": "2026-10-28T19:36:05.650551+00:00",
+  "period": "2024-Q4",
+  "functional_currency": "USD",
+  "offline": true,
+  "counts": {
+    "total": 10,
+    "ready_for_review": 7,
+    "needs_clarification": 1,
+    "rejected_validation": 2,
+    "failed_safe": 0
+  },
+  "accepted_entry_ids": [
+    "JE-001",
+    "JE-003",
+    "JE-004",
+    "JE-006",
+    "JE-007",
+    "JE-009",
+    "JE-010"
+  ],
+  "rejected": [
+    {
+      "request_id": "JE-002",
+      "status": "REJECTED_VALIDATION",
+      "reason": "Rejected by deterministic controls; this entry must not be posted.\n\n- The entry does not balance: debits are 28,500.00 but credits are 25,000.00, a difference of 3,500.00. Rejected at VAL-008."
+    },
+    {
+      "request_id": "JE-005",
+      "status": "NEEDS_CLARIFICATION",
+      "reason": "Paused for human clarification; do not post yet.\n\n- VAL-005: Account code(s) not found in COA: Line 1: '6315'.\n\n- Unknown account(s) 6315 have no COA node. Nearest match: 6310 Travel and Entertainment (55% confidence). Confirm the mapping or create an account."
+    },
+    {
+      "request_id": "JE-008",
+      "status": "REJECTED_VALIDATION",
+      "reason": "Rejected by deterministic controls; this entry must not be posted.\n\n- SEM-001: Entry posts debits and credits to the same account (2170) only. Its net effect is zero, which is typical of a circular or already-settled intercompany entry. Reject and request the counterparty/cash leg.\n\n- SEM-002: Intercompany entry has no non-IC counterparty or cash leg. It cannot be eliminated or settled as posted; provide the matching counterparty entity/account."
+    }
+  ],
+  "totals": {
+    "proposed_debit": "1434200.0",
+    "proposed_credit": "1434200.0",
+    "difference": "0.0"
+  },
+  "inputs": [
+    {
+      "filename": "chart_of_accounts.csv",
+      "sha256_hash": "1139711bd276b2d443ab83b9a6461b3e1f62a26416962b0dcd0e0762028e49bf",
+      "row_count": 72,
+      "ingestion_timestamp": "2026-10-28T19:36:04.960866Z",
+      "record_count": 72
+    },
+    {
+      "filename": "manual_adjustments.json",
+      "sha256_hash": "26fcad0c0c7bda5306efea47e0c73238b2828b5d30afdd1bb0d54bb6a6704a0f",
+      "row_count": 10,
+      "ingestion_timestamp": "2026-10-28T19:36:04.960866Z",
+      "record_count": 10
+    },
+    {
+      "filename": "trial_balance.csv",
+      "sha256_hash": "6a5d38f4a7792e5a749d62ec34be8c2aa29f540ccf3c95caedf3e1f1b5203ca8",
+      "row_count": 62,
+      "ingestion_timestamp": "2026-10-28T19:36:04.976651Z",
+      "record_count": 62
+    },
+    {
+      "filename": "fx_rates.csv",
+      "sha256_hash": "268c9b9b5a14ea5533e596ed8872f1c3b5515c92a46c9b197a10ef9f909d1893",
+      "row_count": 7,
+      "ingestion_timestamp": "2026-10-28T19:36:04.986501Z",
+      "record_count": 7
+    },
+    {
+      "filename": "prior_period_tb.csv",
+      "sha256_hash": "aa1439622935eadb08ec1d0911c0c2f207fd9e71d32479326f5714a4c4180595",
+      "row_count": 33,
+      "ingestion_timestamp": "2026-10-28T19:36:05.006596Z",
+      "record_count": 33
+    }
+  ],
+  "input_warnings": [
+    "Duplicate trial balance row: account_code '6310' with currency 'USD' appears 2 times.",
+    "Trial balance does not balance: total debit 71,072,200.00 != total credit 71,077,000.00 (difference -4,800.00). Do not use it as a control total until the imbalance is explained.",
+    "Trial balance account '9999' ('Suspense - Unmapped') is not present in Chart of Accounts.",
+    "Missing FX rate for currency 'GBP': rate_type 'period_end' is not provided for period '2024-Q4'.",
+    "Trial balance does not balance: total debit 35,177,800.00 != total credit 32,345,000.00 (difference 2,832,800.00). Do not use it as a control total until the imbalance is explained.",
+    "Trial balance account '6905' ('Sundry Operating Expenses') is not present in Chart of Accounts.",
+    "Prior-period account '6905' ('Sundry Operating Expenses') is absent from the current trial balance; confirm any account renumbering before roll-forward."
+  ]
+}

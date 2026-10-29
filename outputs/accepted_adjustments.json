@@ -1,0 +1,211 @@
+{
+  "run_id": "RUN-20261028T193605Z-92fe41-113971",
+  "period": "2024-Q4",
+  "functional_currency": "USD",
+  "note": "Accepted for human review only. Nothing has been posted.",
+  "entries": [
+    {
+      "id": "JE-001",
+      "intent": "ACCRUAL",
+      "description": "Accrue Q4 bonus pool",
+      "date": "2024-12-31",
+      "currency": "USD",
+      "lines": [
+        {
+          "account": "6100",
+          "account_name": "Salaries and Wages",
+          "debit": "850000.0",
+          "credit": "0.0",
+          "memo": "Bonus accrual"
+        },
+        {
+          "account": "2120",
+          "account_name": "Accrued Expenses",
+          "debit": "0.0",
+          "credit": "850000.0",
+          "memo": "Accrual offset"
+        }
+      ],
+      "total_debit": "850000.0",
+      "total_credit": "850000.0",
+      "source_references": [
+        "Finance team — bonus accrual workbook v3"
+      ],
+      "run_id": "RUN-20261028T193605Z-92fe41-113971"
+    },
+    {
+      "id": "JE-003",
+      "intent": "REVALUATION",
+      "description": "FX revaluation of EUR cash balance to period-end rate",
+      "date": "2024-12-31",
+      "currency": "USD",
+      "lines": [
+        {
+          "account": "1110",
+          "account_name": "Cash and Cash Equivalents",
+          "debit": "11200.0",
+          "credit": "0.0",
+          "memo": "EUR cash uplift"
+        },
+        {
+          "account": "7310",
+          "account_name": "FX Gain/Loss - Unrealized",
+          "debit": "0.0",
+          "credit": "11200.0",
+          "memo": "Unrealized FX gain"
+        }
+      ],
+      "total_debit": "11200.0",
+      "total_credit": "11200.0",
+      "source_references": [
+        "FX reval calc"
+      ],
+      "run_id": "RUN-20261028T193605Z-92fe41-113971"
+    },
+    {
+      "id": "JE-004",
+      "intent": "PROVISION",
+      "description": "Bad debt provision top-up",
+      "date": "2024-12-31",
+      "currency": "USD",
+      "lines": [
+        {
+          "account": "6600",
+          "account_name": "Bad Debt Expense",
+          "debit": "45000.0",
+          "credit": "0.0",
+          "memo": "Top-up reserve"
+        },
+        {
+          "account": "1121",
+          "account_name": "Allowance for Doubtful Accounts",
+          "debit": "0.0",
+          "credit": "45000.0",
+          "memo": "Increase allowance"
+        }
+      ],
+      "total_debit": "45000.0",
+      "total_credit": "45000.0",
+      "source_references": [
+        "AR aging review"
+      ],
+      "run_id": "RUN-20261028T193605Z-92fe41-113971"
+    },
+    {
+      "id": "JE-006",
+      "intent": "DEPRECIATION",
+      "description": "Depreciation catch-up — Q4",
+      "date": "2024-12-31",
+      "currency": "USD",
+      "lines": [
+        {
+          "account": "6500",
+          "account_name": "Depreciation Expense",
+          "debit": "215000.0",
+          "credit": "0.0",
+          "memo": "Q4 dep"
+        },
+        {
+          "account": "1211",
+          "account_name": "Accumulated Depreciation - PPE",
+          "debit": "0.0",
+          "credit": "215000.0",
+          "memo": "Accum dep"
+        }
+      ],
+      "total_debit": "215000.0",
+      "total_credit": "215000.0",
+      "source_references": [
+        "Fixed asset register"
+      ],
+      "run_id": "RUN-20261028T193605Z-92fe41-113971"
+    },
+    {
+      "id": "JE-007",
+      "intent": "TAX_ADJUSTMENT",
+      "description": "Deferred tax true-up",
+      "date": "2024-12-31",
+      "currency": "USD",
+      "lines": [
+        {
+          "account": "8200",
+          "account_name": "Deferred Tax Expense",
+          "debit": "38000.0",
+          "credit": "0.0",
+          "memo": "DTA reduction"
+        },
+        {
+          "account": "1250",
+          "account_name": "Deferred Tax Asset",
+          "debit": "0.0",
+          "credit": "38000.0",
+          "memo": "Reduce DTA"
+        }
+      ],
+      "total_debit": "38000.0",
+      "total_credit": "38000.0",
+      "source_references": [
+        "Tax provision memo"
+      ],
+      "run_id": "RUN-20261028T193605Z-92fe41-113971"
+    },
+    {
+      "id": "JE-009",
+      "intent": "ACCRUAL",
+      "description": "Accrue legal fees for ongoing litigation",
+      "date": "2024-12-31",
+      "currency": "USD",
+      "lines": [
+        {
+          "account": "6400",
+          "account_name": "Professional Fees",
+          "debit": "75000.0",
+          "credit": "0.0",
+          "memo": "Legal accrual"
+        },
+        {
+          "account": "2120",
+          "account_name": "Accrued Expenses",
+          "debit": "0.0",
+          "credit": "75000.0",
+          "memo": "Accrued legal"
+        }
+      ],
+      "total_debit": "75000.0",
+      "total_credit": "75000.0",
+      "source_references": [
+        "Legal memo dated 2024-12-29"
+      ],
+      "run_id": "RUN-20261028T193605Z-92fe41-113971"
+    },
+    {
+      "id": "JE-010",
+      "intent": "RECLASSIFICATION",
+      "description": "Reclass long-term debt current portion",
+      "date": "2024-12-31",
+      "currency": "USD",
+      "lines": [
+        {
+          "account": "2210",
+          "account_name": "Long-term Debt",
+          "debit": "200000.0",
+          "credit": "0.0",
+          "memo": "Out of LT debt"
+        },
+        {
+          "account": "2140",
+          "account_name": "Current Portion of Long-term Debt",
+          "debit": "0.0",
+          "credit": "200000.0",
+          "memo": "Into current"
+        }
+      ],
+      "total_debit": "200000.0",
+      "total_credit": "200000.0",
+      "source_references": [
+        "Treasury schedule"
+      ],
+      "run_id": "RUN-20261028T193605Z-92fe41-113971"
+    }
+  ]
+}

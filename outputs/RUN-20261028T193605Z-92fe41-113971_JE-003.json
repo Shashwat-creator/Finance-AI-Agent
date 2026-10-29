@@ -1,0 +1,380 @@
+{
+  "request_id": "JE-003",
+  "run_id": "RUN-20261028T193605Z-92fe41-113971",
+  "status": "READY_FOR_REVIEW",
+  "intent": "REVALUATION",
+  "decision_reason": "Approved for human review with 1 warning(s) that need reviewer attention. Intent: REVALUATION. Debits equal credits at 11,200.00 USD. No posting occurs until a finance user signs off.\n\n- FX revaluation for EUR is 11,200.00 but the provided rates imply 10,730.20 / 19,809.60 on the 825,400.00 EUR balance. Verify the revaluation calculation before posting.",
+  "input_sources": [
+    {
+      "filename": "chart_of_accounts.csv",
+      "sha256_hash": "1139711bd276b2d443ab83b9a6461b3e1f62a26416962b0dcd0e0762028e49bf",
+      "row_count": 72,
+      "ingestion_timestamp": "2026-10-28T19:36:04.960866Z",
+      "record_count": 72
+    },
+    {
+      "filename": "manual_adjustments.json",
+      "sha256_hash": "26fcad0c0c7bda5306efea47e0c73238b2828b5d30afdd1bb0d54bb6a6704a0f",
+      "row_count": 10,
+      "ingestion_timestamp": "2026-10-28T19:36:04.960866Z",
+      "record_count": 10
+    },
+    {
+      "filename": "trial_balance.csv",
+      "sha256_hash": "6a5d38f4a7792e5a749d62ec34be8c2aa29f540ccf3c95caedf3e1f1b5203ca8",
+      "row_count": 62,
+      "ingestion_timestamp": "2026-10-28T19:36:04.976651Z",
+      "record_count": 62
+    },
+    {
+      "filename": "fx_rates.csv",
+      "sha256_hash": "268c9b9b5a14ea5533e596ed8872f1c3b5515c92a46c9b197a10ef9f909d1893",
+      "row_count": 7,
+      "ingestion_timestamp": "2026-10-28T19:36:04.986501Z",
+      "record_count": 7
+    },
+    {
+      "filename": "prior_period_tb.csv",
+      "sha256_hash": "aa1439622935eadb08ec1d0911c0c2f207fd9e71d32479326f5714a4c4180595",
+      "row_count": 33,
+      "ingestion_timestamp": "2026-10-28T19:36:05.006596Z",
+      "record_count": 33
+    }
+  ],
+  "input_hash": "a8d04d52984351569d169aa75733e5447ead964164f7627c403a33e2dfd85cd6",
+  "normalization_changes": [],
+  "data_quality_issues": [],
+  "account_candidates": [],
+  "proposed_entry": {
+    "request_id": "JE-003",
+    "description": "FX revaluation of EUR cash balance to period-end rate",
+    "period": "2024-Q4",
+    "currency": "USD",
+    "date": "2024-12-31",
+    "lines": [
+      {
+        "account_code": "1110",
+        "account_name": "Cash and Cash Equivalents",
+        "debit": "11200.0",
+        "credit": "0.0",
+        "memo": "EUR cash uplift"
+      },
+      {
+        "account_code": "7310",
+        "account_name": "FX Gain/Loss - Unrealized",
+        "debit": "0.0",
+        "credit": "11200.0",
+        "memo": "Unrealized FX gain"
+      }
+    ],
+    "total_debit": "11200.0",
+    "total_credit": "11200.0",
+    "difference": "0.0",
+    "rationale": "Intent classified as REVALUATION. Proposed entry reconstructed from the submitted adjustment lines; nothing has been posted.",
+    "source_references": [
+      "FX reval calc"
+    ]
+  },
+  "validation_results": [
+    {
+      "rule_id": "VAL-001",
+      "rule_name": "Required Fields",
+      "status": "PASS",
+      "message": "All required fields (description, date, source, lines) are present and non-empty.",
+      "details": {
+        "fields": [
+          "description",
+          "date",
+          "source",
+          "lines"
+        ]
+      }
+    },
+    {
+      "rule_id": "VAL-002",
+      "rule_name": "Period Check",
+      "status": "PASS",
+      "message": "Period '2024-Q4' matches expected period '2024-Q4'.",
+      "details": {
+        "period": "2024-Q4",
+        "expected_period": "2024-Q4"
+      }
+    },
+    {
+      "rule_id": "VAL-003",
+      "rule_name": "Currency Check",
+      "status": "PASS",
+      "message": "Currency 'USD' is supported.",
+      "details": {
+        "currency": "USD",
+        "supported_currencies": [
+          "EUR",
+          "GBP",
+          "USD"
+        ]
+      }
+    },
+    {
+      "rule_id": "VAL-004",
+      "rule_name": "Amount Validity",
+      "status": "PASS",
+      "message": "All debit and credit amounts are numeric, finite, and non-negative.",
+      "details": {
+        "line_count": 2
+      }
+    },
+    {
+      "rule_id": "VAL-005",
+      "rule_name": "Account Exists",
+      "status": "PASS",
+      "message": "All account codes exist in the Chart of Accounts.",
+      "details": {
+        "account_codes": [
+          "1110",
+          "7310"
+        ]
+      }
+    },
+    {
+      "rule_id": "VAL-006",
+      "rule_name": "Account Postable",
+      "status": "PASS",
+      "message": "All accounts are postable non-Header accounts.",
+      "details": {}
+    },
+    {
+      "rule_id": "VAL-007",
+      "rule_name": "Single Side",
+      "status": "PASS",
+      "message": "Each line has exactly one positive side (debit > 0 XOR credit > 0).",
+      "details": {}
+    },
+    {
+      "rule_id": "VAL-008",
+      "rule_name": "Entry Balanced",
+      "status": "PASS",
+      "message": "Entry is balanced. Total debit: 11200.0, Total credit: 11200.0.",
+      "details": {
+        "total_debit": "11200.0",
+        "total_credit": "11200.0",
+        "difference": "0"
+      }
+    },
+    {
+      "rule_id": "VAL-009",
+      "rule_name": "Minimum Lines",
+      "status": "PASS",
+      "message": "Entry has 2 lines (minimum required: 2).",
+      "details": {
+        "line_count": 2
+      }
+    },
+    {
+      "rule_id": "VAL-010",
+      "rule_name": "Duplicate Check",
+      "status": "PASS",
+      "message": "Entry is not a duplicate.",
+      "details": {
+        "is_duplicate": false
+      }
+    },
+    {
+      "rule_id": "SEM-001",
+      "rule_name": "No-op / Single-Account Wash",
+      "status": "PASS",
+      "message": "Entry touches more than one account.",
+      "details": {}
+    },
+    {
+      "rule_id": "SEM-002",
+      "rule_name": "Intercompany Counterparty",
+      "status": "PASS",
+      "message": "Not an intercompany entry.",
+      "details": {}
+    },
+    {
+      "rule_id": "SEM-003",
+      "rule_name": "Cash-Flow Category Resolved",
+      "status": "PASS",
+      "message": "All accounts have a cash-flow category.",
+      "details": {}
+    },
+    {
+      "rule_id": "SEM-004",
+      "rule_name": "FX Revaluation Tie-Out",
+      "status": "PASS",
+      "message": "FX revaluation for EUR is 11,200.00 but the provided rates imply 10,730.20 / 19,809.60 on the 825,400.00 EUR balance. Verify the revaluation calculation before posting.",
+      "details": {
+        "reval_amount": "11200.0",
+        "estimates": [
+          "10730.2000",
+          "19809.6000"
+        ]
+      }
+    },
+    {
+      "rule_id": "SEM-005",
+      "rule_name": "Duplicate Line",
+      "status": "PASS",
+      "message": "No duplicate identical lines.",
+      "details": {}
+    },
+    {
+      "rule_id": "SEM-006",
+      "rule_name": "Date Within Period",
+      "status": "PASS",
+      "message": "Entry date 2024-12-31 is within 2024-Q4 (2024-10-01 to 2024-12-31).",
+      "details": {
+        "date": "2024-12-31",
+        "period_start": "2024-10-01",
+        "period_end": "2024-12-31"
+      }
+    }
+  ],
+  "reconciliation": {
+    "total_debit": "11200.0",
+    "total_credit": "11200.0",
+    "difference": "0.0",
+    "is_balanced": true,
+    "evidence_checks": [
+      {
+        "check": "entry_balanced",
+        "passed": true,
+        "details": "Total debit: 11200.0, Total credit: 11200.0, Difference: 0.0"
+      },
+      {
+        "check": "account_exists",
+        "line_number": 1,
+        "account_code": "1110",
+        "account_name": "Cash and Cash Equivalents",
+        "passed": true,
+        "details": "Account '1110' found in COA: Cash and Cash Equivalents."
+      },
+      {
+        "check": "normal_balance_alignment",
+        "line_number": 1,
+        "account_code": "1110",
+        "passed": true,
+        "details": "Aligned with normal balance (Debit)."
+      },
+      {
+        "check": "account_exists",
+        "line_number": 2,
+        "account_code": "7310",
+        "account_name": "FX Gain/Loss - Unrealized",
+        "passed": true,
+        "details": "Account '7310' found in COA: FX Gain/Loss - Unrealized."
+      },
+      {
+        "check": "normal_balance_alignment",
+        "line_number": 2,
+        "account_code": "7310",
+        "passed": false,
+        "details": "Line for account '7310' (FX Gain/Loss - Unrealized) has credit of 11200.0, but account normal balance is 'Debit'."
+      },
+      {
+        "check": "source_references",
+        "passed": true,
+        "details": "Found 1 source reference(s): FX reval calc."
+      }
+    ],
+    "warnings": [
+      "Line for account '7310' (FX Gain/Loss - Unrealized) has credit of 11200.0, but account normal balance is 'Debit'."
+    ]
+  },
+  "warnings": [
+    "FX revaluation for EUR is 11,200.00 but the provided rates imply 10,730.20 / 19,809.60 on the 825,400.00 EUR balance. Verify the revaluation calculation before posting."
+  ],
+  "errors": [],
+  "retry_history": [],
+  "audit_events": [
+    {
+      "timestamp": "2026-10-28T19:36:05.161106+00:00",
+      "request_id": "JE-003",
+      "run_id": "RUN-20261028T193605Z-92fe41-113971",
+      "node": "intake",
+      "event_type": "node_start",
+      "details": {
+        "description": "FX revaluation of EUR cash balance to period-end rate"
+      }
+    },
+    {
+      "timestamp": "2026-10-28T19:36:05.161106+00:00",
+      "request_id": "JE-003",
+      "run_id": "RUN-20261028T193605Z-92fe41-113971",
+      "node": "normalizer",
+      "event_type": "transformation",
+      "details": {
+        "transformations": 0,
+        "quality_issues": 0
+      }
+    },
+    {
+      "timestamp": "2026-10-28T19:36:05.162402+00:00",
+      "request_id": "JE-003",
+      "run_id": "RUN-20261028T193605Z-92fe41-113971",
+      "node": "intake",
+      "event_type": "intent_classified",
+      "details": {
+        "intent": "REVALUATION"
+      }
+    },
+    {
+      "timestamp": "2026-10-28T19:36:05.162402+00:00",
+      "request_id": "JE-003",
+      "run_id": "RUN-20261028T193605Z-92fe41-113971",
+      "node": "mapper",
+      "event_type": "mapping_decision",
+      "details": {
+        "unknown_accounts": [],
+        "candidates": []
+      }
+    },
+    {
+      "timestamp": "2026-10-28T19:36:05.162402+00:00",
+      "request_id": "JE-003",
+      "run_id": "RUN-20261028T193605Z-92fe41-113971",
+      "node": "validator",
+      "event_type": "validation",
+      "details": {
+        "failed": []
+      }
+    },
+    {
+      "timestamp": "2026-10-28T19:36:05.168181+00:00",
+      "request_id": "JE-003",
+      "run_id": "RUN-20261028T193605Z-92fe41-113971",
+      "node": "validator",
+      "event_type": "semantic_checks",
+      "details": {
+        "failed": []
+      }
+    },
+    {
+      "timestamp": "2026-10-28T19:36:05.168181+00:00",
+      "request_id": "JE-003",
+      "run_id": "RUN-20261028T193605Z-92fe41-113971",
+      "node": "reconciler",
+      "event_type": "reconciliation",
+      "details": {
+        "total_debit": "11200.0",
+        "total_credit": "11200.0",
+        "difference": "0.0",
+        "is_balanced": true
+      }
+    },
+    {
+      "timestamp": "2026-10-28T19:36:05.168181+00:00",
+      "request_id": "JE-003",
+      "run_id": "RUN-20261028T193605Z-92fe41-113971",
+      "node": "workflow",
+      "event_type": "node_end",
+      "details": {
+        "status": "READY_FOR_REVIEW",
+        "intent": "REVALUATION"
+      }
+    }
+  ],
+  "human_review_required": true,
+  "disclaimer": "This entry REQUIRES HUMAN REVIEW and has NOT been posted. Verify all account codes, amounts, and accounting policy before approval."
+}

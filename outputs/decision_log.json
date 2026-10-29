@@ -1,0 +1,125 @@
+{
+  "run_id": "RUN-20261028T193605Z-92fe41-113971",
+  "generated_at": "2026-10-28T19:36:05.650551+00:00",
+  "decisions": [
+    {
+      "request_id": "JE-001",
+      "status": "READY_FOR_REVIEW",
+      "intent": "ACCRUAL",
+      "idempotency_key": "a3c785557644f1c4bc37874aa2149289f2d9c7988ac99981bd831139bb6a23a5",
+      "decision_reason": "Approved for human review. Intent: ACCRUAL. Debits equal credits at 850,000.00 USD. No posting occurs until a finance user signs off.",
+      "failed_rules": [],
+      "account_candidates": []
+    },
+    {
+      "request_id": "JE-002",
+      "status": "REJECTED_VALIDATION",
+      "intent": "RECLASSIFICATION",
+      "idempotency_key": "cec10baa0f2119d85d45b271b70c205032eb0bbdb72ca72ecf4f0858ba73ae6c",
+      "decision_reason": "Rejected by deterministic controls; this entry must not be posted.\n\n- The entry does not balance: debits are 28,500.00 but credits are 25,000.00, a difference of 3,500.00. Rejected at VAL-008.",
+      "failed_rules": [
+        "VAL-008"
+      ],
+      "account_candidates": []
+    },
+    {
+      "request_id": "JE-003",
+      "status": "READY_FOR_REVIEW",
+      "intent": "REVALUATION",
+      "idempotency_key": "a8d04d52984351569d169aa75733e5447ead964164f7627c403a33e2dfd85cd6",
+      "decision_reason": "Approved for human review with 1 warning(s) that need reviewer attention. Intent: REVALUATION. Debits equal credits at 11,200.00 USD. No posting occurs until a finance user signs off.\n\n- FX revaluation for EUR is 11,200.00 but the provided rates imply 10,730.20 / 19,809.60 on the 825,400.00 EUR balance. Verify the revaluation calculation before posting.",
+      "failed_rules": [],
+      "account_candidates": []
+    },
+    {
+      "request_id": "JE-004",
+      "status": "READY_FOR_REVIEW",
+      "intent": "PROVISION",
+      "idempotency_key": "e31d74f38eb8b9bd2cd6fc0e52aa838ebbbb8c5097c5ac0fa5e7891691a82388",
+      "decision_reason": "Approved for human review. Intent: PROVISION. Debits equal credits at 45,000.00 USD. No posting occurs until a finance user signs off.",
+      "failed_rules": [],
+      "account_candidates": []
+    },
+    {
+      "request_id": "JE-005",
+      "status": "NEEDS_CLARIFICATION",
+      "intent": "RECLASSIFICATION",
+      "idempotency_key": "f4ff4521432b47b3dedf5b430154929f0fb24c8de0bb69cb5f38931b166a8b93",
+      "decision_reason": "Paused for human clarification; do not post yet.\n\n- VAL-005: Account code(s) not found in COA: Line 1: '6315'.\n\n- Unknown account(s) 6315 have no COA node. Nearest match: 6310 Travel and Entertainment (55% confidence). Confirm the mapping or create an account.",
+      "failed_rules": [
+        "VAL-005"
+      ],
+      "account_candidates": [
+        {
+          "account_code": "6310",
+          "account_name": "Travel and Entertainment",
+          "confidence": 0.55,
+          "rank": 1,
+          "evidence": "shared terms: travel; account-code prefix matches '631'"
+        },
+        {
+          "account_code": "6300",
+          "account_name": "Marketing and Advertising",
+          "confidence": 0.3,
+          "rank": 2,
+          "evidence": "lexical name similarity"
+        },
+        {
+          "account_code": "6400",
+          "account_name": "Professional Fees",
+          "confidence": 0.2571,
+          "rank": 3,
+          "evidence": "lexical name similarity"
+        }
+      ]
+    },
+    {
+      "request_id": "JE-006",
+      "status": "READY_FOR_REVIEW",
+      "intent": "DEPRECIATION",
+      "idempotency_key": "e200822dd7cc1cc995952efcde69b6822b0e9ee6a409eaca0b642854b8b9c374",
+      "decision_reason": "Approved for human review. Intent: DEPRECIATION. Debits equal credits at 215,000.00 USD. No posting occurs until a finance user signs off.",
+      "failed_rules": [],
+      "account_candidates": []
+    },
+    {
+      "request_id": "JE-007",
+      "status": "READY_FOR_REVIEW",
+      "intent": "TAX_ADJUSTMENT",
+      "idempotency_key": "0391c6f485f686923e7d95430de236447812cceec2d7e47fcd516c730cd52cf8",
+      "decision_reason": "Approved for human review. Intent: TAX_ADJUSTMENT. Debits equal credits at 38,000.00 USD. No posting occurs until a finance user signs off.",
+      "failed_rules": [],
+      "account_candidates": []
+    },
+    {
+      "request_id": "JE-008",
+      "status": "REJECTED_VALIDATION",
+      "intent": "INTERCOMPANY",
+      "idempotency_key": "249f29feaf45640e88f73afcd07ae4133d0d8b93e12749564dba7b37852035f7",
+      "decision_reason": "Rejected by deterministic controls; this entry must not be posted.\n\n- SEM-001: Entry posts debits and credits to the same account (2170) only. Its net effect is zero, which is typical of a circular or already-settled intercompany entry. Reject and request the counterparty/cash leg.\n\n- SEM-002: Intercompany entry has no non-IC counterparty or cash leg. It cannot be eliminated or settled as posted; provide the matching counterparty entity/account.",
+      "failed_rules": [
+        "SEM-001",
+        "SEM-002"
+      ],
+      "account_candidates": []
+    },
+    {
+      "request_id": "JE-009",
+      "status": "READY_FOR_REVIEW",
+      "intent": "ACCRUAL",
+      "idempotency_key": "c4626b5c630bba4864618868bdb9e2423617b1002cbe6f2d97f6c719de94e0b6",
+      "decision_reason": "Approved for human review. Intent: ACCRUAL. Debits equal credits at 75,000.00 USD. No posting occurs until a finance user signs off.",
+      "failed_rules": [],
+      "account_candidates": []
+    },
+    {
+      "request_id": "JE-010",
+      "status": "READY_FOR_REVIEW",
+      "intent": "RECLASSIFICATION",
+      "idempotency_key": "507ff0a0a5364c909c56f017556e84ca9f9516d9bf7eaf80e4daa5d4884c5b1a",
+      "decision_reason": "Approved for human review. Intent: RECLASSIFICATION. Debits equal credits at 200,000.00 USD. No posting occurs until a finance user signs off.",
+      "failed_rules": [],
+      "account_candidates": []
+    }
+  ]
+}
